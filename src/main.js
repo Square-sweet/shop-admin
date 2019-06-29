@@ -9,6 +9,20 @@ import './assets/css/index.css'
 
 Vue.use(ElementUI)
 
+router.beforeEach((to, from, next) => {
+  // console.log(1)
+  if (to.path === '/login') {
+    next()
+    return
+  }
+
+  if (localStorage.getItem('token')) {
+    next()
+  } else {
+    router.push('/login')
+  }
+})
+
 Vue.config.productionTip = false;
 
 new Vue({
